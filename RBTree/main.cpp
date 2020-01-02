@@ -15,16 +15,16 @@ int main(int argc, char *argv[])
 
     ShowWidget w(t);
     ControlWidget control_widget;
-    QObject::connect(&control_widget, ControlWidget::signalInsert, &w, &ShowWidget::insert);
-    QObject::connect(&control_widget, ControlWidget::signalRemove, &w, &ShowWidget::remove);
+    QObject::connect(&control_widget, &ControlWidget::signalInsert, &w, &ShowWidget::insert);
+    QObject::connect(&control_widget, &ControlWidget::signalRemove, &w, &ShowWidget::remove);
 
     auto test = [&t, &dis, &gen, &control_widget]()
     {
-        for(int i = 0; i != 100000; ++i)
+        for(int i = 0; i != 10; ++i)
         {
             control_widget.insert(dis(gen));
         }
-        for(int i = 0; i != 100000; ++i)
+        for(int i = 0; i != 10; ++i)
         {
             control_widget.remove(dis(gen));
         }
